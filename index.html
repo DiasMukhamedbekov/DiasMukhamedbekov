@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Портфолио Диаса</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    :root {
+      --brand: #e9950e;
+      --nav: rgba(34, 34, 34, 0.8);
+      --nav-solid: rgba(34, 34, 34, 0.9);
+      --radius: 25px;
+    }
+
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: Roboto, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+      scroll-behavior: smooth;
+      line-height: 1.5;
+      background: url("back.jpg") no-repeat center center fixed;
+      background-size: cover;
+      padding-top: 80px;
+      color: #fff;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 30px 60px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.4);
+      animation: fadeIn 1.2s ease-in;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      background: var(--nav);
+      padding: 15px;
+      text-align: center;
+      z-index: 1000;
+      transition: box-shadow .3s ease, background .3s ease;
+      backdrop-filter: blur(6px);
+    }
+    nav.scrolled { box-shadow: 0 2px 10px rgba(0,0,0,.4); background: var(--nav-solid); }
+    nav a {
+      color: #f3f4eb;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: color .25s;
+    }
+    nav a:hover { color: var(--brand); }
+
+    section {
+      min-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      text-align: center;
+      background: rgba(0,0,0,0.45);
+      border-radius: var(--radius);
+      margin: 50px 0;
+      scroll-margin-top: 100px;
+    }
+
+    .resume-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 25px;
+      background: var(--brand);
+      color: #fff;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background .25s;
+      animation: fadeUp 1.5s ease;
+    }
+    .resume-btn:hover { background: #d35400; }
+
+    #intro {
+      position: relative;
+      text-align: center;
+      padding: 80px 20px;
+      background: radial-gradient(circle at center, rgba(60, 30, 100, 0.6) 0%, rgba(0, 0, 0, 0.8) 100%);
+      border-radius: 25px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.4);
+      overflow: hidden;
+    }
+
+    .intro-content {
+      max-width: 700px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 1.2s ease-in;
+    }
+
+    .intro-photo {
+      position: relative;
+      margin-bottom: 25px;
+      animation: slideDown 1.5s ease;
+    }
+
+    .photo-bg {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 230px; height: 230px;
+      background: radial-gradient(circle, rgba(255,215,100,0.3) 0%, transparent 70%);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      filter: blur(15px);
+      z-index: 0;
+    }
+
+    .intro-photo img {
+      position: relative;
+      z-index: 1;
+      border-radius: 50%;
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border: 3px solid #fff;
+      box-shadow: 0 0 25px rgba(233,149,14,0.5);
+    }
+
+    .greeting {
+      font-size: 2.2em;
+      margin: 10px 0 5px;
+      font-weight: 700;
+      animation: fadeUp 1.5s ease;
+    }
+
+    .name {
+      font-size: 1.8em;
+      margin: 0 0 20px;
+      font-weight: 700;
+      animation: fadeUp 1.8s ease;
+    }
+
+    .dash { color: #fff; opacity: 0.9; }
+
+    .accent-line {
+      width: 80px;
+      height: 3px;
+      background: var(--brand);
+      margin: 15px 0 25px;
+      border-radius: 2px;
+      animation: fadeUp 1.9s ease;
+    }
+
+    .position {
+      font-size: 1.1em;
+      line-height: 1.5;
+      opacity: 0.95;
+      max-width: 650px;
+      margin-bottom: 25px;
+      animation: fadeUp 2s ease;
+    }
+
+    .intro-text {
+      font-size: 1em;
+      opacity: 0.85;
+      line-height: 1.6;
+      max-width: 650px;
+      margin-bottom: 30px;
+      animation: fadeUp 2.1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    #skills { text-align: center; color: white; }
+    .skills-grid {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 30px; max-width: 1100px;
+    }
+    .skill-card {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 16px;
+      padding: 25px 30px;
+      width: 320px;
+      text-align: left;
+      transition: transform .3s ease, box-shadow .3s ease, background .3s ease;
+      animation: fadeUp 1.2s ease;
+    }
+    .skill-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 25px rgba(0,0,0,.4);
+      background: rgba(255,255,255,.15);
+    }
+    .skill-card h3 { color: var(--brand); margin-bottom: 15px; font-size: 1.2em; }
+    .skill-card ul { list-style: none; padding: 0; margin: 0; line-height: 1.6; }
+    .skill-card li::before { content: "• "; color: var(--brand); }
+
+    .contacts a { color: #fff; }
+
+    @media (max-width: 900px) {
+      main { padding: 20px; }
+      .greeting { font-size: 1.8em; }
+      .name { font-size: 1.5em; }
+      .photo-bg { width: 190px; height: 190px; filter: blur(10px); }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="#intro">Главная</a>
+  <a href="#skills">Навыки</a>
+  <a href="#projects">Проекты</a>
+  <a href="#certificates">Сертификаты</a>
+  <a href="#contacts">Контакты</a>
+</nav>
+
+<main>
+  <section id="intro">
+    <div class="intro-content">
+      <div class="intro-photo">
+        <div class="photo-bg"></div>
+        <img src="avatar.jpg" alt="Фото Диаса">
+      </div>
+
+      <h1 class="greeting">Здравствуйте!</h1>
+      <h2 class="name"><span class="dash">Я —</span> <span class="highlight">Диас&nbsp;Мухамедбеков</span></h2>
+
+      <div class="accent-line"></div>
+
+      <p class="position">
+        Старший инженер-диспетчер, развивающий направление аналитики данных и цифровизации производственных процессов
+      </p>
+
+      <p class="intro-text">
+        В настоящее время работаю в горнодобывающей отрасли, анализирую производственные данные и внедряю цифровые решения для повышения эффективности оборудования и технологических процессов.
+      </p>
+
+      <a href="ДиасМ_резюме.pdf" target="_blank" class="resume-btn">📄 Скачать резюме</a>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Навыки</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>🧠 Аналитика и цифровизация</h3>
+        <ul>
+          <li><b>Power BI</b> — дашборды и визуализация данных</li>
+          <li><b>SQL</b> — запросы и анализ FMS</li>
+          <li><b>Python</b> — автоматизация отчётности</li>
+          <li><b>Excel VBA</b> — макросы и инструменты для отчётов</li>
+          <li><b>Data Analyze</b> — обработка и интерпретация данных</li>
+        </ul>
+      </div>
+
+      <div class="skill-card">
+        <h3>⚙️ Инженерные и технические</h3>
+        <ul>
+          <li><b>Fleet Management System (Hexagon / Jigsaw)</b></li>
+          <li><b>AutoCAD, GEOVIA Surpac</b> — инженерные планы</li>
+          <li><b>Планирование и оптимизация горных операций</b></li>
+          <li><b>LEAN-меры и контроль качества</b></li>
+        </ul>
+      </div>
+
+      <div class="skill-card">
+        <h3>👥 Управление и Soft Skills</h3>
+        <ul>
+          <li>Проектное управление и стратегическое мышление</li>
+          <li>Коучинг и наставничество сотрудников</li>
+          <li>Командная работа и эффективная коммуникация</li>
+          <li>Гибкость и внимательность к деталям</li>
+          <li>Продвижение культуры безопасности (HSE)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+  <h2>Проекты</h2>
+  <p style="opacity:0.9; max-width:800px; text-align:center;">
+    Здесь представлены ключевые проекты, демонстрирующие мой опыт в аналитике данных, цифровизации и автоматизации процессов.
+  </p>
+
+  <div class="projects-grid">
+    
+    <div class="project-card fade-up">
+      <img src="KPI_equip.jpg" alt="Power BI Dashboard">
+      <div class="project-content">
+        <h3>Эффективность погрузочного цикла (анализ времени)</h3>
+        <p><b>Power BI Dashboard</b></p>
+        <p><b>Цель:</b> Анализирование потери времени и выявление узких мест в производственном цикле техники.</p>
+        <p><b>Инструменты:</b> Fleet Management System, SQL, Power BI.</p>
+        <p><b>Результат:</b> Выявлены узкие места в процессе погрузки, определены конкретные машины с аномалиями, можно принять управленческие решения: перераспределить технику, скорректировать маршруты или провести брифинг с операторами</p>
+        <a href="https://github.com/your-link" target="_blank" class="project-btn">🔗 Подробнее</a>
+      </div>
+    </div>
+
+    <div class="project-card fade-up">
+      <img src="FMS.jpg" alt="Telegram Bot">
+      <div class="project-content">
+        <h3>Telegram-бот для FMS-заявок</h3>
+        <p><b>Цель:</b> Автоматизация уведомлений и учёта заявок на обслуживание оборудования.</p>
+        <p><b>Инструменты:</b> Power Automate, SharePoint, Telegram API.</p>
+        <p><b>Результат:</b> Сокращено время реакции на инциденты на 30%, улучшена прозрачность коммуникаций.</p>
+        <a href="https://github.com/your-link" target="_blank" class="project-btn">🔗 Подробнее</a>
+      </div>
+    </div>
+
+    <div class="project-card fade-up">
+      <img src="Excel.jpg" alt="Automation Script">
+      <div class="project-content">
+        <h3>Автоматизация отчётности (Python + Excel VBA)</h3>
+        <p><b>Цель:</b> Ускорить процесс подготовки сменных и суточных отчётов.</p>
+        <p><b>Инструменты:</b> Python, Pandas, openpyxl, VBA.</p>
+        <p><b>Результат:</b> Время формирования отчёта сокращено с 30 минут до 5 минут.</p>
+        <a href="https://github.com/your-link" target="_blank" class="project-btn">🔗 Подробнее</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  #projects {
+    text-align: center;
+    color: white;
+    padding: 40px;
+    background: rgba(0,0,0,0.45);
+    border-radius: 25px;
+    margin: 60px 0;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 35px;
+    margin-top: 40px;
+    justify-items: center;
+  }
+
+  .project-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    overflow: hidden;
+    max-width: 380px;
+    text-align: left;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+    transition: transform .3s ease, box-shadow .3s ease, background .3s ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255,255,255,0.15);
+    box-shadow: 0 8px 35px rgba(0,0,0,0.5);
+  }
+
+  .project-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 2px solid var(--brand);
+  }
+
+  .project-content {
+    padding: 20px 25px;
+  }
+
+  .project-content h3 {
+    color: var(--brand);
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+  }
+
+  .project-content p {
+    font-size: 0.95em;
+    opacity: 0.9;
+    margin-bottom: 8px;
+  }
+
+  .project-btn {
+    display: inline-block;
+    margin-top: 10px;
+    background: var(--brand);
+    color: white;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background .25s;
+  }
+
+  .project-btn:hover { background: #d35400; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up { animation: fadeUp 1.3s ease; }
+</style>
+
+  <section id="certificates">
+    <h2>Сертификаты</h2>
+    <p><b>Hexagon OP Pro Training</b> — Hardware & Fleet Management Systems</p>
+    <p><b>Курс Power BI</b> — Data Visualization & Dashboards</p>
+    <p><b>Английский язык</b> — уровень B2</p>
+  </section>
+
+  <section id="contacts" class="contacts">
+    <h2>Контакты</h2>
+    <p>Email: <a href="mailto:diasmukhamedbekov@gmail.com">diasmukhamedbekov@gmail.com</a></p>
+    <p>Telegram: <a href="https://t.me/DiasMD" target="_blank">@DiasMD</a></p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/dias-mukhamedbekov-071590317" target="_blank">linkedin.com/in/dias-mukhamedbekov</a></p>
+  </section>
+</main>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 10);
+  });
+</script>
+</body>
+</html>
